@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  asin: MyString
+  title: MyString
+  price: MyString
+  imageurl: MyString
+  detailpageurl: MyString
+  rating: MyString
+  totalreviews: MyString
+
+two:
+  asin: MyString
+  title: MyString
+  price: MyString
+  imageurl: MyString
+  detailpageurl: MyString
+  rating: MyString
+  totalreviews: MyString
