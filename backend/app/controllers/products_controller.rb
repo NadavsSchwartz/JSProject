@@ -16,7 +16,6 @@ class ProductsController < ActionController::API
   # POST /products
   def create
     @product = Product.new(product_params)
-    binding.pry
     if @product.save
       render json: @product, status: :created, location: @product
     else
@@ -47,6 +46,6 @@ class ProductsController < ActionController::API
 
     # Only allow a trusted parameter "white list" through.
     def product_params
-       params.require(:product).permit(:asin, :title, :price, :imageurl, :detailpageurl, :rating, :totalreviews)
+       params.require(:product).permit(:asin, :title, :price, :imageurl, :detailpageurl, :rating, :totalreviews, :user_id)
     end
 end

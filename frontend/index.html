@@ -17,36 +17,36 @@
 <body>
     <nav class="black">
         <div class="nav-wrapper container">
-            <a href="# " data-target="slide-out " class="sidenav-trigger ">profile</a>
+            <a href="#" data-target="slide-out" class="sidenav-trigger">profile</a>
             <a id="logo-container" href="/" class="brand-logo white-text">Tracker</a>
             <div class="right">
-                <a class="btn" onclick="signup()">Signup</a>
-                <a class="btn" onclick="login()">Login</a>
+                <a class="btn" onclick="signUp()">Signup</a>
+                <a class="btn " onclick="login()">Login</a>
             </div>
         </div>
     </nav>
     <ul id="slide-out " class="sidenav ">
         <li>
             <div class="user-view ">
-                <div class="background black ">
+                <div class="background black">
                 </div>
-                <a href="#user "><img class="circle " src="https://picsum.photos/200 "></a>
-                <a href="#name "><span class="white-text name ">username</span></a>
-                <a href="#email "><span class="white-text email ">email</span></a>
+                <a href="#user"><img class="circle" src="https://picsum.photos/200"></a>
+                <a href="#name"><span class="white-text name">username</span></a>
+                <a href="#email "><span class="white-text email">email</span></a>
             </div>
         </li>
         <li><a href="#! ">model</a></li>
-        <li><a class="waves-effect " href="#! "> model2</a></li>
+        <li><a class="waves-effect" href="#!"> model2</a></li>
     </ul>
 
-    <section class="section"></section>
+    <section class="section "></section>
 
     <div class="container">
         <div class="section col s12">
             <form id="form">
                 <div class="input-field">
                     <input id="search" type="search" required>
-                    <label class="label-icon" for="search"><i class="material-icons ">search</i></label>
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                 </div>
                 <div class="center s3">
                     <button class="btn btn-large blue" type="submit" name="action">Search</button>
@@ -56,18 +56,23 @@
     </div>
     </div>
 
-    <section class="section col s6 ">
-        <div id="products ">
-
+    <section>
+        <div id="signup"></div>
+    </section>
+    <section>
+        <div id="login"></div>
+    </section>
+    <section class="section col s6">
+        <div id="products">
         </div>
     </section>
 
 
 
 
-    <script type=" text/javascript " src="App.js "></script>
-    <script type="text/javascript " src="index.js "></script>
-    <script type="text/javascript " src="Product.js "></script>
+    <script type=" text/javascript" src="App.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="Product.js"></script>
 
     <script>
         var elem = document.querySelector('.sidenav');

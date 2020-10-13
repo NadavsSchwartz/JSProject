@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
     belongs_to :user
+    validates_uniqueness_of :asin
 
     def get_products(data)
         response = Unirest.get "https://amazon-price1.p.rapidapi.com/search?keywords=#{data}&marketplace=US",

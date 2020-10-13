@@ -16,6 +16,7 @@ class Product {
         this.rating = rating;
         this.totalReviews = totalReviews;
         this.display()
+        this.save()
     }
 
     save() {
@@ -42,7 +43,7 @@ class Product {
                 if (info.errors) {
                     console.log(info.errors);
                 } else {
-                    debugger
+                    console.log('success')
                 }
             });
     }
@@ -70,9 +71,10 @@ class Product {
 
         </div> 
         `
-            // const h2 = document.createElement("h2");
-            // product.innerText = this.title;
-            // product.appendChild(h2);
+
+        // const h2 = document.createElement("h2");
+        // product.innerText = this.title;
+        // product.appendChild(h2);
 
         // const img = document.createElement('img');
         // img.src = this.img;
