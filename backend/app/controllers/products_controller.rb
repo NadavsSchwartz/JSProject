@@ -1,10 +1,15 @@
 class ProductsController < ActionController::API
-  before_action :set_product, only: [:show, :update, :destroy]
+  before_action :set_product, only: %i[show update destroy]
 
   # GET /products
   def index
-    @products = Product.all
-
+    binding.pry
+    if params['user_id']
+      @user = User.find(params['user_id'])
+      @products = @user.products
+    else
+      @products = Product.all
+    end
     render json: @products
   end
 
@@ -39,13 +44,14 @@ class ProductsController < ActionController::API
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def product_params
-       params.require(:product).permit(:asin, :title, :price, :imageurl, :detailpageurl, :rating, :totalreviews, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def product_params
+    params.require(:product).permit(:asin, :title, :price, :imageurl, :detailpageurl, :rating, :totalreviews, :user_id)
+  end
 end

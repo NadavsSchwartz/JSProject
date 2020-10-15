@@ -20,26 +20,13 @@
             <a href="#" data-target="slide-out" class="sidenav-trigger">profile</a>
             <a id="logo-container" href="/" class="brand-logo white-text">Tracker</a>
             <div class="right">
-                <a class="btn" onclick="signUp()">Signup</a>
-                <a class="btn " onclick="login()">Login</a>
+                <a class="btn" id="login-btn" onclick="login()">Login</a>
+                <a class="btn" id="signup-btn" onclick="signUp()">SignUp</a>
             </div>
         </div>
     </nav>
-    <ul id="slide-out " class="sidenav ">
-        <li>
-            <div class="user-view ">
-                <div class="background black">
-                </div>
-                <a href="#user"><img class="circle" src="https://picsum.photos/200"></a>
-                <a href="#name"><span class="white-text name">username</span></a>
-                <a href="#email "><span class="white-text email">email</span></a>
-            </div>
-        </li>
-        <li><a href="#! ">model</a></li>
-        <li><a class="waves-effect" href="#!"> model2</a></li>
-    </ul>
 
-    <section class="section "></section>
+    <section class="section"></section>
 
     <div class="container">
         <div class="section col s12">
@@ -56,28 +43,51 @@
     </div>
     </div>
 
-    <section>
-        <div id="signup"></div>
-    </section>
-    <section>
-        <div id="login"></div>
-    </section>
-    <section class="section col s6">
-        <div id="products">
+    <section class="container">
+        <div id="login" class="col s6">
+            <div class="col s6 center">
+                <form id="loginForm">
+                    <h5>Login</h5>
+                    <div class="input-field" id="email">
+                        <input type="email" id="loginEmail" equired>
+                        <label for="email">Email</label>
+                    </div>
+                    <button class="btn" type="submit" name="action" id="loginbtn">Login</button>
+                </form>
+            </div>
         </div>
     </section>
 
+    <section class="container">
+        <div id="signUp" class="col s6">
+            <div class="col s6 center">
+                <form id="SignUpForm">
+                    <h5>SignUp</h5>
+                    <div class="input-field" id="name">
+                        <input type="text" id="signUpName" required>
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="input-field" id="email">
+                        <input type="email" id="signUpEmail" required>
+                        <label for=" email ">Email</label>
+                    </div>
+                    <button class="btn " type="submit " name="action " id="signupbtn ">SignUp</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="container ">
+        <div id="signup " class="col s6 "></div>
+    </section>
+    <section class="section col s6 ">
+        <div id="products ">
+        </div>
+    </section>
 
-
-
-    <script type=" text/javascript" src="App.js"></script>
-    <script type="text/javascript" src="index.js"></script>
-    <script type="text/javascript" src="Product.js"></script>
-
-    <script>
-        var elem = document.querySelector('.sidenav');
-        var instance = new M.Sidenav(elem);
-    </script>
+    <script type=" text/javascript " src="App.js "></script>
+    <script type="text/javascript " src="index.js "></script>
+    <script type="text/javascript " src="Product.js "></script>
+    <script type="text/javascript " src="User.js "></script>
 </body>
 
 </html>

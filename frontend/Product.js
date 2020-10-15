@@ -51,7 +51,6 @@ class Product {
 
     display() {
         const productDiv = document.getElementById('products');
-
         productDiv.innerHTML += `
         <div class="card horizontal">
             <div class="card-image">
@@ -59,14 +58,15 @@ class Product {
             </div>
 
             <div class="card-stacked">
-                <div class = "card-content" >
-                <span class = "card-title" > ${this.title} </span> 
+                <div class = "card-content">
+                <span class = "card-title"> ${this.title} </span> 
                 <p> ${this.rating} rating, ${this.totalReviews} reviews </p>
                 <span> Price:${this.price}</span>
             </div>
 
-            <div class = "card-action" >
-                <a class="btn" href=${this.detailPageURL}>Details</a> <a class="btn">Track</button>
+            <div class="card-action">
+                <a class="btn" href=${this.detailPageURL}>Details</a> 
+                <a class="btn" href="">Track</a> 
             </div>
 
         </div> 

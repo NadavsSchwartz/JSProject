@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :current_user, only: [:verify_login, :login]
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
@@ -16,7 +17,7 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
-
+    session[:user_id] = @user.id
     if @user.save
       render json: @user, status: :created, location: @user
     else
@@ -24,12 +25,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def verify_login
+    binding.pry
+        if logged_in?
+      render json: {session: session['user_id']}
+        end
+  end
+
   def login
-    @user = User.find_by(email: params[:email])
-    if @user
-      render json: {user: @user}
-    else
-      render json: {errors: "Invalid email"}
+      @user = find_by_email
+      if @user
+        return session[:user_id] = @user.id
+      else
+        render json: {errors: "Invalid email"}
     end
   end
 
@@ -56,5 +64,18 @@ class UsersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def user_params
       params.require(:user).permit(:name, :email)
+    end
+
+    def find_by_email
+      @user = User.find_by(params[:email])
+    end
+
+    def current_user
+   User.find_by(id: session[:user_id])
+    end
+
+    def logged_in?
+       
+    !current_user.nil?
     end
 end
