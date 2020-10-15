@@ -20,6 +20,8 @@ class ProductsController < ActionController::API
 
   # POST /products
   def create
+    binding.pry
+    @user = User.find(params[:user_id])
     @product = Product.new(product_params)
     if @product.save
       render json: @product, status: :created, location: @product

@@ -1,6 +1,5 @@
 window.addEventListener('DOMContentLoaded', (event) => {
     hideElems()
-    loggedIn()
     userInput()
 });
 
@@ -34,6 +33,9 @@ function newApp(data) {
     app.getProducts(data)
 }
 
+
+let userEmail;
+
 function login() {
     const loginForm = document.getElementById('loginForm');
     const signUpForm = document.getElementById('SignUpForm');
@@ -43,32 +45,42 @@ function login() {
     } else {
         loginForm.style.display = "none";
     }
+
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const userEmail = document.getElementById('loginEmail');
-        fetch("http://localhost:3000/login", {
-                method: "post",
+        userEmail = document.getElementById('loginEmail').value;
+        hideElems()
+    })
+}
+
+let user_id;
+
+function getTrackLink() {
+    if (userEmail !== undefined) {
+        fetch("http://localhost:3000/find", {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    user: {
-                        email: this.email,
-                    },
+                    email: `${userEmail}`
                 }),
             })
             .then((res) => {
-                res.json()
-                debugger;
                 if (res.ok) {
-                    return res;
+                    return res.json();
                 } else {
                     alert(`Request rejected with status ${res.status}`)
                     throw Error(`Request rejected with status ${res.status}`);
                 }
             })
-
-    })
+            .then((info) => {
+                user_id = info.id
+            })
+    } else {
+        alert('please Log in first.')
+        throw Error('please Log in first.')
+    }
 }
 
 function signUp() {
