@@ -55,6 +55,8 @@ function login() {
 }
 
 
+
+
 function getTrackLink(email) {
     if (email != undefined) {
         fetch("http://localhost:3000/find", {
@@ -75,12 +77,17 @@ function getTrackLink(email) {
                 }
             })
             .then((info) => {
-                user = new User(info.email, info.name, info.id, info.products)
-                const inputField = document.querySelector('form');
-                inputField.style.display = "block";
-                const profile = document.getElementById('lsBtns')
-                profile.innerHTML =
-                    `<a class="btn" onclick="userProducts()">${user.name}</a>`
+                if (info.errors) {
+                    alert(info.errors)
+                    throw Error()
+                } else {
+                    user = new User(info.email, info.name, info.id, info.products)
+                    const inputField = document.querySelector('form');
+                    inputField.style.display = "block";
+                    const profile = document.getElementById('lsBtns')
+                    profile.innerHTML =
+                        `<a class="btn" onclick="userProducts()">${user.name}</a>`
+                }
             })
     } else {
         alert('please Log in first.')
