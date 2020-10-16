@@ -2,10 +2,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
     hideElems()
     userInput()
 });
+let app;
+let user;
 
 function hideElems() {
-    // const inputField = document.querySelector('form');
-    // inputField.style.display = "none";
+    const inputField = document.querySelector('form');
+    inputField.style.display = "none";
     const signUpForm = document.getElementById('SignUpForm');
     signUpForm.style.display = "none";
     const loginForm = document.getElementById('loginForm')
@@ -29,12 +31,11 @@ function validateInput(data) {
 }
 
 function newApp(data) {
-    const app = new App();
+    app = new App();
     app.getProducts(data)
 }
 
 
-let userEmail;
 
 function login() {
     const loginForm = document.getElementById('loginForm');
@@ -48,22 +49,21 @@ function login() {
 
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        userEmail = document.getElementById('loginEmail').value;
-        hideElems()
+        getTrackLink(document.getElementById('loginEmail').value);
+        hideElems();
     })
 }
 
-let user_id;
 
-function getTrackLink() {
-    if (userEmail !== undefined) {
+function getTrackLink(email) {
+    if (email != undefined) {
         fetch("http://localhost:3000/find", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    email: `${userEmail}`
+                    email
                 }),
             })
             .then((res) => {
@@ -75,7 +75,9 @@ function getTrackLink() {
                 }
             })
             .then((info) => {
-                user_id = info.id
+                user = new User(info.email, info.name, info.id, info.products)
+                const inputField = document.querySelector('form');
+                inputField.style.display = "block";
             })
     } else {
         alert('please Log in first.')

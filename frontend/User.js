@@ -1,8 +1,15 @@
 class User {
-    constructor(email, name, id = null) {
+    constructor(email, name, id = null, products = []) {
         this.email = email;
         this.name = name;
-        this.id = id
+        this.id = id;
+        this.products = products.map(p => {
+            p.ASIN = p.asin
+            p.imageUrl = p.imageurl
+            p.detailsUrlPage = p.detailpageurl
+            p.totalReviews = p.totalreviews
+            return new Product(p);
+        })
     }
 
     save() {

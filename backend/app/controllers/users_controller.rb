@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   def find
     @user = find_by_email
     if @user
-      render json: @user, status: :created, location: @user
+      render json: @user, include: :products, status: :created, location: @user
     else
       render json: { errors: 'Invalid email' }
     end
@@ -54,9 +54,9 @@ class UsersController < ApplicationController
   end
 
   # Only allow a trusted parameter "white list" through.
-  # def user_params
-  #   params.require(:user).permit(:name, :email)
-  # end
+  def user_params
+    params.require(:user).permit(:name, :email)
+  end
 
   def find_by_email
     @user = User.find_by(email: params[:email])

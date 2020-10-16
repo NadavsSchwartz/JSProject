@@ -7,7 +7,7 @@ class Product {
         detailPageURL,
         rating,
         totalReviews,
-        id,
+        user_id,
     }) {
         this.asin = ASIN;
         this.title = title;
@@ -16,9 +16,7 @@ class Product {
         this.detailPageURL = detailPageURL;
         this.rating = rating;
         this.totalReviews = totalReviews;
-        this.id = user_id
-        this.display()
-
+        this.user_id = user_id
     }
 
     display() {
@@ -43,68 +41,50 @@ class Product {
 
         </div> 
         `
-        const trackProduct = document.getElementById('trackProduct')
-        trackProduct.addEventListener('click', () => {
-            fetch(`http://localhost:3000/users/${this.id}/products`, {
-                    method: "post",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        product: {
-                            asin: this.asin,
-                            title: this.title,
-                            price: this.price,
-                            imageurl: this.img,
-                            detailpageurl: this.detailPageURL,
-                            rating: this.rating,
-                            totalreviews: this.totalReviews,
-                            id: this.id
+        const trackProduct = document.querySelectorAll("[id^='trackProduct']")
+        for (const product of trackProduct) {
+            product.addEventListener('click', () => {
+                fetch(`http://localhost:3000/users/${user.id}/products`, {
+                        method: "post",
+                        headers: {
+                            "Content-Type": "application/json",
                         },
-                    }),
-                })
-                .then((r) => r.json())
-                .then((info) => {
-                    if (info.errors) {
-                        console.log(info.errors);
-                    } else {
-                        console.log('success')
-                    }
-                });
-        })
-
-        // const h2 = document.createElement("h2");
-        // product.innerText = this.title;
-        // product.appendChild(h2);
-
-        // const img = document.createElement('img');
-        // img.src = this.img;
-        // product.appendChild(img)
-
-        // const para = document.createElement("p");
-        // para.innerText = this.price;
-        // product.appendChild(para);
-
-        // const details = document.createElement("button");
-        // details.innerHTML = "Details";
-        // details.addEventListener("click", (e) => location.href = this.detailPageURL);
-        // product.appendChild(details)
-
-        // const price = document.createElement("p");
-        // price.innerText = `price: ${this.rating}`;
-        // product.appendChild(price);
-
-        // const button = document.createElement("button");
-        // button.innerText = "Delete";
-        // button.addEventListener("click", (e) => this.delete(e));
-        // product.appendChild(button);
+                        body: JSON.stringify({
+                            product: {
+                                asin: this.asin,
+                                title: this.title,
+                                price: this.price,
+                                imageurl: this.img,
+                                detailpageurl: this.detailPageURL,
+                                rating: this.rating,
+                                totalreviews: this.totalReviews,
+                            },
+                        }),
+                    })
+                    .then((r) => r.json())
+                    .then((info) => {
+                        if (info.errors) {
+                            console.log(info.errors);
+                        } else {
+                            p.ASIN = p.asin
+                            p.imageUrl = p.imageurl
+                            p.detailsUrlPage = p.detailpageurl
+                            p.totalReviews = p.totalreviews
+                            user.products.push(new Product(info))
+                            console.log('success')
+                        }
+                    });
+                product.remove()
+                    // userProducts(product)
+            })
+        }
     }
 
     delete(e) {
-        fetch(`http://localhost:3000/products/${this.id}`, {
+        fetch(`http://localhost:3000/users/${this.user_id}/products/${this.asin}`, {
             method: "DELETE",
         }).then(() => {
-            id.delete(this.id);
+            user_id.delete(this.user_id);
         });
     }
 }
