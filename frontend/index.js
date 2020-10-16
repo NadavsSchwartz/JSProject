@@ -78,11 +78,18 @@ function getTrackLink(email) {
                 user = new User(info.email, info.name, info.id, info.products)
                 const inputField = document.querySelector('form');
                 inputField.style.display = "block";
+                const profile = document.getElementById('lsBtns')
+                profile.innerHTML =
+                    `<a class="btn" onclick="userProducts()">${user.name}</a>`
             })
     } else {
         alert('please Log in first.')
         throw Error('please Log in first.')
     }
+}
+
+function userProducts() {
+    debugger;
 }
 
 function signUp() {

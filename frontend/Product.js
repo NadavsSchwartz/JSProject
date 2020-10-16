@@ -61,7 +61,15 @@ class Product {
                             },
                         }),
                     })
-                    .then((r) => r.json())
+                    .then((res) => {
+                        res.json()
+                        if (res.ok) {
+                            return res;
+                        } else {
+                            alert(`Request rejected with status ${res.status}`)
+                            throw Error(`Request rejected with status ${res.status}`);
+                        }
+                    })
                     .then((info) => {
                         if (info.errors) {
                             console.log(info.errors);

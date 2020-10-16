@@ -18,7 +18,7 @@ class ProductsController < ActionController::API
 
   def create
     @user = User.find(params[:user_id])
-
+    binding.pry
     @user.products.create(product_params)
     if @user.save
       render json: @user.products.last, status: :created, location: user_product_path(@user, @user.products.last)
