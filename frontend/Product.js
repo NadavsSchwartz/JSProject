@@ -20,8 +20,9 @@ class Product {
     }
 
     display() {
-        const productDiv = document.getElementById('products');
-        productDiv.innerHTML += `
+        const productsDiv = document.getElementById('products');
+        this.pDiv = document.createElement('div')
+        this.pDiv.innerHTML = `
         <div class="card horizontal">
             <div class="card-image">
                 <img src=${this.img}>
@@ -36,63 +37,53 @@ class Product {
 
             <div class="card-action">
                 <a class="btn" href=${this.detailPageURL}>Details</a> 
-                <a class="btn" id="trackProduct">Track</a> 
+                <button class="btn trackProduct" >Track</button> 
             </div>
 
         </div> 
         `
-        const trackProduct = document.querySelectorAll("[id^='trackProduct']")
-        for (const product of trackProduct) {
-            product.addEventListener('click', () => {
-                fetch(`http://localhost:3000/users/${user.id}/products`, {
-                        method: "post",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            product: {
-                                asin: this.asin,
-                                title: this.title,
-                                price: this.price,
-                                imageurl: this.img,
-                                detailpageurl: this.detailPageURL,
-                                rating: this.rating,
-                                totalreviews: this.totalReviews,
-                            },
-                        }),
-                    })
-                    .then((res) => {
-                        res.json()
-                        if (res.ok) {
-                            return res;
-                        } else {
-                            alert(`Request rejected with status ${res.status}`)
-                            throw Error(`Request rejected with status ${res.status}`);
-                        }
-                    })
-                    .then((info) => {
-                        if (info.errors) {
-                            console.log(info.errors);
-                        } else {
-                            p.ASIN = p.asin
-                            p.imageUrl = p.imageurl
-                            p.detailsUrlPage = p.detailpageurl
-                            p.totalReviews = p.totalreviews
-                            user.products.push(new Product(info))
-                            console.log('success')
-                        }
-                    });
-                product.remove()
-                    // userProducts(product)
-            })
-        }
+        productsDiv.appendChild(this.pDiv);
+        this.pDiv.querySelector('.trackProduct').addEventListener('click', this.track.bind(this));
+
     }
 
-    delete(e) {
-        fetch(`http://localhost:3000/users/${this.user_id}/products/${this.asin}`, {
-            method: "DELETE",
-        }).then(() => {
-            user_id.delete(this.user_id);
-        });
+    track() {
+
+        fetch(`http://localhost:3000/users/${user.id}/products`, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    product: {
+                        asin: this.asin,
+                        title: this.title,
+                        price: this.price,
+                        imageurl: this.img,
+                        detailpageurl: this.detailPageURL,
+                        rating: this.rating,
+                        totalreviews: this.totalReviews,
+                    },
+                }),
+            })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    alert(`Request rejected with status ${res.status}`)
+                    throw Error(`Request rejected with status ${res.status}`);
+                }
+            })
+            .then((info) => {
+                if (info.errors) {
+                    console.log(info.errors);
+                } else {
+                    this.id = info.id;
+                    user.products.push(this);
+                    console.log('success');
+                }
+            });
+        this.pDiv.remove();
     }
+
 }

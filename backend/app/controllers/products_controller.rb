@@ -18,24 +18,24 @@ class ProductsController < ActionController::API
 
   def create
     @user = User.find(params[:user_id])
-    binding.pry
     @user.products.create(product_params)
     if @user.save
-      render json: @user.products.last, status: :created, location: user_product_path(@user, @user.products.last)
+      render json: @user.products, status: :created, location: user_product_path(@user, @user.products)
     else
       render json: @user.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @product = Product.find_by(asin: params[:asin])
-    @product.destroy
+    @product = Product.find_by(asin: params[:id])
+    @product.delete
   end
 
   private
 
   def set_product
-    @product = Product.find(params[:id])
+    @product = Product.find(params[:id]
+    )
   end
 
   # Only allow a trusted parameter "white list" through.

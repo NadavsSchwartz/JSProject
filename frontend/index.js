@@ -96,7 +96,7 @@ function getTrackLink(email) {
 }
 
 function userProducts() {
-    debugger;
+    user.displayProducts()
 }
 
 function signUp() {

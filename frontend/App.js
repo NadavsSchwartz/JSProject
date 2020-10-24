@@ -16,14 +16,15 @@ class App {
                         "x-rapidapi-key": "04ffdca11fmsh6d2319daea4c209p172278jsn9b371a9115f8"
                     }
                 })
-                .then((r) => r.json())
+                .then((r) => { return r.json() })
                 .then((info) => {
                     info.forEach((p) => {
                         const product = new Product(p);
-                        this.searchedProducts.push(product);
                         product.display();
+                        this.searchedProducts.push(p);
 
                     })
+
                 })
                 .catch(err => {
                     console.log(err);
