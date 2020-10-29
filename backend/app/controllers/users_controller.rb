@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   def find
     @user = find_by_email
     if @user
-      render json: @user, include: :products, status: :created, location: @user
+      render json: @user, include: :products
     else
       render json: { errors: 'Invalid email' }
     end

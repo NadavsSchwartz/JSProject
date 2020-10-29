@@ -4,6 +4,7 @@ class App {
 
     }
 
+    // look up JS .env for hiding serial key
     getProducts(data) {
         if (user == undefined) {
             alert('please Log in first.')

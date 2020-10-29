@@ -80,6 +80,7 @@ class Product {
                 } else {
                     this.id = info.id;
                     user.products.push(this);
+                    user.displayProducts()
                     console.log('success');
                 }
             });
